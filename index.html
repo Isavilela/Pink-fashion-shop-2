@@ -1,38 +1,281 @@
-**index.html**
-</main>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pink Boutique — Loja de Roupas Femininas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --pink-1:#fff0f6;
+      --pink-2:#ffd6e7;
+      --pink-3:#ff9ecf;
+      --pink-4:#ff5fa8;
+      --accent:#6b0f3a;
+      --muted:#6b6b6b;
+      --glass: rgba(255,255,255,0.6);
+      --card-shadow: 0 6px 18px rgba(107,15,58,0.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      margin:0; background: linear-gradient(180deg,var(--pink-1),#fff); color:#2b0b1a;
+      -webkit-font-smoothing:antialiased;
+    }
+    header{background: linear-gradient(90deg,var(--pink-2),var(--pink-3)); padding:18px 6%; position:sticky; top:0; z-index:40; box-shadow:0 2px 10px rgba(0,0,0,0.03)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:var(--pink-4);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:'Playfair Display', serif}
+    .brand h1{margin:0;font-size:18px;letter-spacing:0.4px}
+    nav ul{display:flex;gap:14px;list-style:none;margin:0;padding:0}
+    nav a{color:var(--accent);text-decoration:none;font-weight:600}
+    .search{flex:1;max-width:420px;margin:0 18px;position:relative}
+    .search input{width:100%;padding:10px 14px;border-radius:999px;border:1px solid rgba(107,15,58,0.08);outline:none}
+    .icons{display:flex;gap:12px;align-items:center}
+    .btn{background:var(--accent);color:white;padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:600}
 
+    /* Hero */
+    .hero{padding:48px 6%;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .hero-left h2{font-family:'Playfair Display', serif;font-size:38px;margin:0;color:var(--accent)}
+    .hero-left p{color:var(--muted);margin-top:12px;line-height:1.5}
+    .cta{margin-top:18px;display:flex;gap:10px}
 
-<footer>
-<div>
-<strong>Pink Boutique</strong>
-<div class="muted">Rua Exemplo, 123 • Atendimento por email: contato@pinkboutique.com</div>
-</div>
-<div class="muted">© <span id="year"></span> Pink Boutique — Todos os direitos reservados</div>
-</footer>
+    .card-spot{background:linear-gradient(180deg,var(--glass),transparent);padding:18px;border-radius:16px;box-shadow:var(--card-shadow)}
+    .hero-right img{width:100%;border-radius:12px;display:block}
 
+    /* Products */
+    main{padding:36px 6%}
+    .filters{display:flex;gap:12px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+    .filters select, .filters button{padding:8px 12px;border-radius:10px;border:1px solid rgba(107,15,58,0.08);background:white}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .product{background:white;border-radius:12px;padding:12px;box-shadow:var(--card-shadow);transition:transform .18s ease, box-shadow .18s ease}
+    .product:hover{transform:translateY(-6px)}
+    .product img{width:100%;height:320px;object-fit:cover;border-radius:10px}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    .meta .title{font-weight:600}
+    .price{font-weight:700;color:var(--pink-4)}
+    .badge{background:var(--pink-2);padding:6px 8px;border-radius:999px;font-size:13px;color:var(--accent)}
 
-<!-- Modal quick view -->
-<div id="modal" class="modal" role="dialog" aria-hidden="true">
-<div class="box">
-<div>
-<img id="modalImg" src="" alt="imagem do produto" style="width:100%;border-radius:10px;max-height:420px;object-fit:cover">
-</div>
-<div>
-<button class="close" onclick="closeModal()">Fechar</button>
-<h3 id="modalTitle"></h3>
-<p id="modalDesc" class="muted" style="margin-top:8px"></p>
-<div style="margin-top:14px">
-<div style="font-weight:700;font-size:20px;color:var(--pink-4)" id="modalPrice"></div>
-<div style="margin-top:12px;display:flex;gap:8px">
-<button class="btn" onclick="addToCart(modalProductId)">Adicionar ao carrinho</button>
-<button class="close" onclick="alert('Ir para checkout (exemplo)')">Comprar agora</button>
-</div>
-</div>
-</div>
-</div>
-</div>
+    /* Footer */
+    footer{padding:28px 6%;margin-top:30px;border-top:1px solid rgba(107,15,58,0.06);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
+    /* Responsive */
+    @media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr 320px}}
+    @media (max-width:820px){header{padding:14px 4%}.hero{grid-template-columns:1fr}.hero-right{display:none}.grid{grid-template-columns:repeat(2,1fr)}.search{max-width:200px}}
+    @media (max-width:480px){.grid{grid-template-columns:1fr}.brand h1{font-size:16px}.hero-left h2{font-size:26px}}
 
-<script src="script.js"></script>
+    /* Modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(11,3,8,0.45);z-index:60}
+    .modal .box{background:white;border-radius:12px;max-width:920px;width:92%;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .modal.show{display:flex}
+    .close{background:transparent;border:0;font-size:18px;color:var(--muted);cursor:pointer}
+
+    /* small helper */
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">PB</div>
+        <div>
+          <h1>Pink Boutique</h1>
+          <div class="muted" style="font-size:12px">Moda feminina • Elegante • Conforto</div>
+        </div>
+      </div>
+
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Buscar: vestidos, blusas, casacos..." aria-label="buscar produtos">
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#">Novidades</a></li>
+          <li><a href="#">Roupas</a></li>
+          <li><a href="#">Promoções</a></li>
+        </ul>
+      </nav>
+
+      <div class="icons">
+        <button class="btn" id="openCart">Carrinho (0)</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="card-spot">
+        <h2>Coleção Primavera • Verão</h2>
+        <p>Peças selecionadas em tons de rosa — tecidos leves, modelagens que valorizam e deixam você pronta para qualquer ocasião.</p>
+        <div class="cta">
+          <a class="btn" href="#produtos">Comprar agora</a>
+          <button class="close" onclick="alert('Receba 10% na primeira compra!')">Ganhe 10% na primeira compra</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="card-spot hero-right" style="padding:8px">
+        <img src="https://images.unsplash.com/photo-1520975911175-1b6a3d9e9b61?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=0d7f2b9be0f2b2f8ef9b8f8c8e5b3a54" alt="modelo usando vestido rosa">
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="filters">
+      <select id="category">
+        <option value="all">Todas as categorias</option>
+        <option value="vestidos">Vestidos</option>
+        <option value="blusas">Blusas</option>
+        <option value="casacos">Casacos</option>
+      </select>
+      <select id="sort">
+        <option value="popular">Mais populares</option>
+        <option value="price-asc">Preço: menor</option>
+        <option value="price-desc">Preço: maior</option>
+      </select>
+      <div style="margin-left:auto;display:flex;gap:10px">
+        <button class="badge">Frete grátis acima de R$199</button>
+      </div>
+    </div>
+
+    <section id="produtos" class="grid" aria-live="polite">
+      <!-- Product cards will be injected by JS -->
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <strong>Pink Boutique</strong>
+      <div class="muted">Rua Exemplo, 123 • Atendimento por email: contato@pinkboutique.com</div>
+    </div>
+    <div class="muted">© <span id="year"></span> Pink Boutique — Todos os direitos reservados</div>
+  </footer>
+
+  <!-- Modal quick view -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="box">
+      <div>
+        <img id="modalImg" src="" alt="imagem do produto" style="width:100%;border-radius:10px;max-height:420px;object-fit:cover">
+      </div>
+      <div>
+        <button class="close" onclick="closeModal()">Fechar</button>
+        <h3 id="modalTitle"></h3>
+        <p id="modalDesc" class="muted" style="margin-top:8px"></p>
+        <div style="margin-top:14px">
+          <div style="font-weight:700;font-size:20px;color:var(--pink-4)" id="modalPrice"></div>
+          <div style="margin-top:12px;display:flex;gap:8px">
+            <button class="btn" onclick="addToCart(modalProductId)">Adicionar ao carrinho</button>
+            <button class="close" onclick="alert('Ir para checkout (exemplo)')">Comprar agora</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sample product data
+    const products = [
+      {id:1,title:'Vestido Floral Rosé',cat:'vestidos',price:199.9,img:'https://images.unsplash.com/photo-1520975911175-1b6a3d9e9b61?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.0.3&s=0d7f2b9be0f2b2f8ef9b8f8c8e5b3a54',desc:'Vestido leve, perfeito para passeios e eventos.'},
+      {id:2,title:'Blusa Laço Rosa',cat:'blusas',price:89.9,img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.0.3&s=6e6b1f6c9c3bd2a1b1fa9e3a2c8d0b7a',desc:'Blusa com laço no decote, tecido confortável.'},
+      {id:3,title:'Casaco Tricot Rosa Antigo',cat:'casacos',price:249.0,img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.0.3&s=6e6b1f6c9c3bd2a1b1fa9e3a2c8d0b7a',desc:'Casaco quentinho para dias frios.'},
+      {id:4,title:'Saia Midi Rosada',cat:'vestidos',price:129.5,img:'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.0.3&s=5c9b3a8d9a7f2e2a9b4d6e2d8c3b6a1f',desc:'Saia midi com caimento fluido.'},
+      {id:5,title:'Cropped Charm',cat:'blusas',price:74.9,img:'https://images.unsplash.com/photo-1520975911175-1b6a3d9e9b61?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.0.3&s=0d7f2b9be0f2b2f8ef9b8f8c8e5b3a54',desc:'Cropped moderno para looks casuais.'},
+      {id:6,title:'Kimono Rosé',cat:'casacos',price:159.9,img:'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=900&auto=format&fit=crop&ixlib=rb-4.0.3&s=5c9b3a8d9a7f2e2a9b4d6e2d8c3b6a1f',desc:'Kimono leve que combina com várias peças.'}
+    ];
+
+    const grid = document.querySelector('.grid');
+    const searchInput = document.getElementById('searchInput');
+    const category = document.getElementById('category');
+    const sort = document.getElementById('sort');
+    const openCartBtn = document.getElementById('openCart');
+    let cart = [];
+    let modalProductId = null;
+
+    function formatPrice(v){return 'R$ ' + v.toFixed(2).replace('.',',')}
+
+    function renderProducts(list){
+      grid.innerHTML = '';
+      list.forEach(p => {
+        const div = document.createElement('div'); div.className='product';
+        div.innerHTML = `
+          <img src="${p.img}" alt="${p.title}">
+          <div class="meta">
+            <div>
+              <div class="title">${p.title}</div>
+              <div class="muted" style="font-size:13px">${p.cat}</div>
+            </div>
+            <div style="text-align:right">
+              <div class="price">${formatPrice(p.price)}</div>
+              <div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end">
+                <button class="badge" onclick="openModal(${p.id})">Visualizar</button>
+                <button class="btn" onclick="addToCart(${p.id})">Adicionar</button>
+              </div>
+            </div>
+          </div>`;
+        grid.appendChild(div);
+      });
+    }
+
+    function filterAndRender(){
+      const q = (searchInput.value||'').toLowerCase();
+      const cat = category.value;
+      let out = products.filter(p => (cat==='all' || p.cat===cat) && (p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)));
+      const s = sort.value;
+      if(s==='price-asc') out.sort((a,b)=>a.price-b.price);
+      if(s==='price-desc') out.sort((a,b)=>b.price-a.price);
+      renderProducts(out);
+    }
+
+    searchInput.addEventListener('input', filterAndRender);
+    category.addEventListener('change', filterAndRender);
+    sort.addEventListener('change', filterAndRender);
+
+    // Modal
+    const modal = document.getElementById('modal');
+    function openModal(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      modalProductId = id;
+      document.getElementById('modalImg').src = p.img;
+      document.getElementById('modalTitle').textContent = p.title;
+      document.getElementById('modalDesc').textContent = p.desc;
+      document.getElementById('modalPrice').textContent = formatPrice(p.price);
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden','false');
+    }
+    function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); }
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+
+    // Cart
+    function addToCart(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      const found = cart.find(i=>i.id===id);
+      if(found) found.qty++;
+      else cart.push({id:p.id,title:p.title,price:p.price,qty:1});
+      updateCartUI();
+      alert('Adicionado ao carrinho: '+p.title);
+    }
+    function updateCartUI(){
+      const count = cart.reduce((s,i)=>s+i.qty,0);
+      openCartBtn.textContent = `Carrinho (${count})`;
+    }
+    openCartBtn.addEventListener('click', ()=>{
+      if(cart.length===0) alert('Seu carrinho está vazio.');
+      else{
+        let text = 'Carrinho:\n';
+        cart.forEach(it=> text += `${it.title} — ${it.qty}x — ${formatPrice(it.price*it.qty)}\n`);
+        text += '\nTotal: ' + formatPrice(cart.reduce((s,i)=>s+i.qty*i.price,0));
+        alert(text);
+      }
+    });
+
+    // init
+    document.getElementById('year').textContent = new Date().getFullYear();
+    filterAndRender();
+  </script>
 </body>
 </html>
