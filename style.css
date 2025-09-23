@@ -1,3 +1,6 @@
+
+
+**style.css**
 ```css
 :root{
 --pink-1:#fff0f6;
@@ -50,34 +53,3 @@ main{padding:36px 6%}
 .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
 .meta .title{font-weight:600}
 .price{font-weight:700;color:var(--pink-4)}
-.badge{background:var(--pink-2);padding:6px 8px;border-radius:999px;font-size:13px;color:var(--accent)}
-
-
-/* Footer */
-footer{padding:28px 6%;margin-top:30px;border-top:1px solid rgba(107,15,58,0.06);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-
-
-/* Responsive */
-@media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr 320px}}
-@media (max-width:820px){header{padding:14px 4%}.hero{grid-template-columns:1fr}.hero-right{display:none}.grid{grid-template-columns:repeat(2,1fr)}.search{max-width:200px}}
-@media (max-width:480px){.grid{grid-template-columns:1fr}.brand h1{font-size:16px}.hero-left h2{font-size:26px}}
-
-
-/* Modal */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(11,3,8,0.45);z-index:60}
-.modal .box{background:white;border-radius:12px;max-width:920px;width:92%;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.modal.show{display:flex}
-.close{background:transparent;border:0;font-size:18px;color:var(--muted);cursor:pointer}
-
-
-/* small helper */
-.muted{color:var(--muted)}
-```
-
-
----
-
-
-**script.js** (o mesmo JS que já estava embutido no HTML, agora separado):
-```javascript
-// ... código JavaScript (produtos, filtros, modal, carrinho) ...
